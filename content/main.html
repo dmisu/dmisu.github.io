@@ -1,0 +1,108 @@
+<h2>Объектно-ориентированное программирование</h2>
+<h3>Задача 6. Геометрические фигуры</h3>
+</div>
+
+<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span>
+Перед выполнением прочитайте всю постановку задачи.</div>
+
+<div class="alert alert-danger" role="danger"><span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span> 
+При реализации проекта используйте основные принципы ООП, а также придерживайтесь требований к оформлению кода (см. модуль "Соглашения по оформлению кода Java" на главной странице курса).</div>
+
+
+<ol>
+<li>Создайте новый проект и перенесите в него класс <code>Point3d</code> из задачи "ООП-1. Точка".</li>
+<li>В классе <code>Point3d</code> реализуйте метод <code>boolean equals(Object obj)</code> в соответствии со стандартом Java (см. лекцию по наследованию).</li>
+<li>Создайте новый класс <code>Point2d</code> (точка в двумерном пространстве), унаследовав его от класса <code>Point3d</code> (координата по оси z принимается равной нулю). 
+В новом классе добавьте свойство цвет точки <code>Color color</code> (подключите класс <code>java.awt.Color</code>), реализуйте конструктор, в котором кроме координат точки можно было бы задавать и ее цвет. 
+Реализуйте следующие методы:
+<ul>
+<li><code>void draw()</code> &mdash; отрисовывает точку на холсте;</li>
+<li><code>void move(double dx, double dy)</code> &mdash; выполняет смещение точки в заданном направлении;</li>
+<li><code>void turn(double alpha)</code> &mdash; выполняет поворот точки на заданный угол относительно начала координат.<br/>
+Новые координаты \((x', y')\) в результате поворота точки \((x, y)\) на угол \(\alpha\) имеют вид
+$$x' = x\cos(\alpha) \mp y\sin(\alpha),$$
+$$y' = \pm x\sin(\alpha) + y\cos(\alpha).$$
+
+Конкретные знаки в формулах зависят от того, является ли система координат правосторонней или левосторонней, и выполняется ли вращение по или против часовой стрелки. Верхний знак указан для обычного соглашения: правосторонняя система координат и положительное направление вращения против часовой стрелки (тот же знак верен для левосторонней координатной системы при выборе положительного направления вращения по часовой стрелке; в оставшихся двух комбинациях — нижний знак). 
+</li>
+<!--<li><code>void turn(double alpha, Point2d center)</code> &mdash; выполняет поворот точки на заданный угол относительно точки <code>center</code>;</li>-->
+</ul>
+</li>
+<li>Создайте абстрактный класс фигура на плоскости <code>Shape</code>, определите в нем следующие свойства:
+<ul>
+<li><code>Color color</code> &mdash; цвет контура фигуры; (подключите класс <code>java.awt.Color</code>);</li>
+<li><code>Color backgroundColor</code> &mdash; фоновый цвет фигуры;</li>
+</ul>
+и методы (неабстрактные методы нужно реализовать в классе <code>Shape</code>):
+<ul>
+ 
+<li><code>public abstract double getPerimetr()</code> &mdash; получение периметра фигуры;</li>
+<li><code>public abstract double getArea()</code> &mdash; получение площади фигуры;</li>
+<li><code>public abstract void draw()</code> &mdash; отображение фигуры на экране с помощью класса <code>StdDraw</code> (цвета нужно взять из свойств <code>color</code> и <code>backgroundColor</code>).</li>
+<li><strong><code>public void setColor(Color c)</code></strong> &mdash; изменение цвета контура фигуры;</li>
+<li><strong><code>public void setBackgroundColor(Color c)</code></strong> &mdash; изменение фонового цвета фигуры;</li>
+
+</ul>
+</li>
+
+<li>Создайте интерфейс <code>IScale</code> (изменяемый размер фигуры), который содержит методы:
+<ul>
+<li><code>void resize(double value)</code> &mdash; изменение размеров фигуры пропорциониально по осям (в качестве параметра передается коэффициент изменения размера);</li>
+<li><code>double getWidth()</code> &mdash; вычисление ширины фигуры;</li>
+<li><code>double getHeight()</code> &mdash; вычисление высоты.</li>
+</ul></li>
+
+<li>Создайте интерфейс <code>IMove</code> (изменяемое расположение фигуры), который содержит метод:
+<ul>
+<li><code>void move(double dx, double dy)</code> &mdash; перемещение на плоскости (при реализации этого метода используйте метод <code>move()</code> из класса <code>Point2d</code>);</li>
+</ul></li>
+
+<li>Создайте интерфейс <code>ISwing</code> (изменяемый поворот фигуры), который содержит методы:
+<ul>
+<li><code>Point2d getCenter()</code> &mdash; вычисление центра тяжести фигуры;</li>
+<li><code>void turn(double alpha)</code> &mdash; поворот на заданный угол (при реализации этого метода используйте метод <code>turn()</code> из класса <code>Point2d</code>).</li>
+<!--<li><code>void turn(double alpha, Point2d center)</code> &mdash; поворот на заданный угол относительно точки <code>center</code> (при реализации этого метода используйте метод <code>turn()</code> из класса <code>Point2d</code>).</li>-->
+</ul></li>
+
+<li>Создайте интерфейс <code>IContainer</code> (проверка принадлежности точки), который содержит метод: 
+<ul>
+<li><code>boolean contains(Point2d p)</code> &mdash; проверка находится ли точка внутри или на границе фигуры;</li>
+</ul>
+</li>
+
+<li>Создайте интерфейс <code>IOperation</code> (выполнение операций), который содержит методы: 
+<ul>
+<li><code>boolean contains(IOperation other)</code> &mdash; проверка включает ли фигура фигуру переданную в качестве параметра;</li>
+<li><code>IOperation getUnion(IOperation other)</code> &mdash; построение наименьшей фигуры, содержащей две заданных;</li>
+<li><code>IOperation getIntersection(IOperation other)</code> &mdash; построение фигуры, являющейся пересечением двух фигур 
+(в случае, если фигуры не пересекаются, метод должен возвращать пустую ссылку  &mdash; <code>null</code>).</li>
+</ul></li>
+
+<li>Создайте наследников класса Shape <a href="../../../../lab/" target="var">по вашему варианту</a>. <br />
+Для задания фигур используйте точки на плоскости типа <code>Point2d</code>, <strong>посоветуйтесь с преподавателем по поводу аргументов ваших классов</strong>.<br />
+Классы-наследники должны содержать:
+<ul>
+<li>не менее двух  конструкторов (обязательно создайте конструктор копирования);
+<li>переопределенный метод <code>String&nbsp;toString()</code>;
+<li>переопределенный метод <code>boolean&nbsp;equals(Object o)</code> в соотвествии со стандартом Java; 
+<li>реализацию абстрактных методов из класса <code>Shape</code> и из интерфейсов по вашему варианту. 
+</li>
+</ul>
+
+<li>Продемонстрируйте работу указанных классов в классе <code>ShapeTester</code> 
+(вы должны создать экземпляры класса от каждого наследника <code>Shape</code> и продемонстрировать работу всех реализованных методов, 
+выводя информацию об объектах на консоль, а также отобразив полученные фигуры с помощью метода <code>draw()</code>).</li>
+</ol>
+
+
+
+<!--При попытке создания некорректных фигур вызывайте собственные исключения, например, у окружности не может быть отрицательного радиуса, для треугольника должно выполняться неравенство треугольника и т.п.-->
+
+
+
+<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> 
+Окончательный вариант программы (<strong>проект</strong>, содержащий классы: <tt>Shape.java</tt>, 
+созданные по варианту классы, <tt>Point2d.java</tt>, <tt>Point3d.java</tt> и <tt>ShapeTester.java</tt>, 
+а также все интерфейсы из задания) заархивируйте в формате <b>ZIP</b> и загрузите на сервер для проверки преподавателем. 
+<a href="../../../../upload/">Загрузка файлов</a>.</div>
+
