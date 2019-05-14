@@ -1,0 +1,31 @@
+{
+    "menu": [
+        {
+            "title": "Основы теории множеств",
+            "href": "sets.html",
+            "items": [
+                {
+                    "title": "Множества и операции над ними",
+                    "href": "operations.html"
+                },
+                {
+                    "title": "Отношения",
+                    "href": "relations.html"
+                }
+            ]
+        }, 
+        {
+            "title": "Комбинаторика",
+            "href": "combinatorics.html",
+            "items": [
+                {
+                    "title": "Выборки",
+                    "href": "combinatorics1.html"
+                },
+                {
+                    "title": "Бином Ньютона",
+                    "href": "combinatorics2.html"
+                }
+            ]
+        }]
+}
