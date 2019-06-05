@@ -1,6 +1,6 @@
 $(function () {
     loadContent($("#content"), "main.html");
-    $.get("structure.json")
+    $.getJSON("structure.json")
             .done(loadMenu);
 });
 
